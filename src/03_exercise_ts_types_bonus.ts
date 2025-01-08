@@ -31,6 +31,11 @@ function getLivingHumans(characters: Character[]): Character[] {
     return characters.filter((char) => char.status === 'Alive' && char.species === 'Human');
 }
 
+function getAllNames(characters: Character[]): string[] {
+    return characters.map((char) => char.name);
+}
+
 let characters = await fetchCharacters();
 console.log("Living Humans: ", getLivingHumans(characters));
+console.log("All Names: ", getAllNames(characters));
 
