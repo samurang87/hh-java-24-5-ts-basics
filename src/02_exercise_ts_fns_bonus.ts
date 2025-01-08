@@ -22,7 +22,7 @@ console.log("Squares of all elements", squaredList);
 const trimmedList: number[] = squaredList.slice(2, squaredList.length - 4);
 console.log("Trimmed list", trimmedList);
 
-const notDivisibleBy4: number[] = trimmedList.filter((num:number) => num % 4 !== 0);
+const notDivisibleBy4: number[] = trimmedList.filter((num: number) => num % 4 !== 0);
 console.log("Not divisible by 4", notDivisibleBy4);
 
 const finalResult = notDivisibleBy4.reduce((sum: number, num:number) => sum + num);
