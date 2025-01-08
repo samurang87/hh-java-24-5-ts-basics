@@ -6,6 +6,11 @@ type Character = {
     originName: string;
 };
 
+type SimplifiedCharacter = {
+    name: string;
+    origin: string;
+}
+
 async function fetchCharacters(): Promise<Character[]> {
     const url = 'https://rickandmortyapi.com/api/character';
     try {
@@ -35,7 +40,14 @@ function getAllNames(characters: Character[]): string[] {
     return characters.map((char) => char.name);
 }
 
+function getSimplifiedCharacters(characters: Character[]): SimplifiedCharacter[] {
+    return characters.map((char) => ({
+        name: char.name,
+        origin: char.originName,
+    }));
+}
+
 let characters = await fetchCharacters();
 console.log("Living Humans: ", getLivingHumans(characters));
 console.log("All Names: ", getAllNames(characters));
-
+console.log("Simplified Characters: ", getSimplifiedCharacters(characters));
