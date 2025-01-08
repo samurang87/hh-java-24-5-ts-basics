@@ -3,7 +3,45 @@
 
 type Grade = {
     subject: string;
-    value: "1" | "2" | "3" | "4" | "5" | "6" | "A" | "B" | "C" | "D" | "E" | "F" | undefined;
+    value: 1 | 2 | 3 | 4 | 5 | 6 | "A" | "B" | "C" | "D" | "E" | "F" | undefined;
+}
+
+function stringGrade(grade: Grade): string {
+    return `${grade.subject}: ${grade.value === undefined ? "*" : grade.value}`;
+}
+
+function mapGrade(grade: Grade): number | undefined {
+    switch (grade.value) {
+        case "A":
+            return 1;
+        case "B":
+            return 2;
+        case "C":
+            return 3;
+        case "D":
+            return 4;
+        case "E":
+            return 5;
+        case "F":
+            return 6;
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case undefined:
+            return grade.value;
+        default:
+            throw new Error("Grade not allowed");
+    }
+}
+
+function calculateGradesAverage(grades: Grade[]): number {
+    const mappedGrades: (number | undefined)[] = grades.map(mapGrade);
+    const validGrades: number[] = mappedGrades.filter(grade => grade !== undefined);
+    const sum: number = validGrades.reduce((acc, grade) => acc + grade, 0);
+    return sum / validGrades.length;
 }
 
 type Student = {
@@ -11,10 +49,6 @@ type Student = {
     lastName: string,
     age: number,
     grades: Grade[]
-}
-
-function stringGrade(grade: Grade): string {
-    return `${grade.subject}: ${grade.value === undefined ? "*" : grade.value}`;
 }
 
 function printStudent(student: Student): void {
@@ -25,6 +59,7 @@ function printStudent(student: Student): void {
     for (const grade of student.grades) {
         console.log(stringGrade(grade));
     }
+    console.log(`Average: ${calculateGradesAverage(student.grades)}`);
     console.log(``);
 }
 
@@ -58,7 +93,7 @@ const mary: Student = {
     grades: [
         {
             subject: "Math",
-            value: "1",
+            value: 1,
         },
         {
             subject: "English",
@@ -77,11 +112,11 @@ const james: Student = {
     grades: [
         {
             subject: "Math",
-            value: "2",
+            value: 2,
         },
         {
             subject: "English",
-            value: "1",
+            value: 1,
         },
         {
             subject: "Science",
