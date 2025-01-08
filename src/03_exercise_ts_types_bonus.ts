@@ -27,4 +27,10 @@ async function fetchCharacters(): Promise<Character[]> {
     }
 }
 
-fetchCharacters().then(characters => console.log(characters));
+function getLivingHumans(characters: Character[]): Character[] {
+    return characters.filter((char) => char.status === 'Alive' && char.species === 'Human');
+}
+
+let characters = await fetchCharacters();
+console.log("Living Humans: ", getLivingHumans(characters));
+
