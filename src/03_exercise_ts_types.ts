@@ -18,6 +18,10 @@ function printStudent(student: Student): void {
     console.log(``);
 }
 
+function printAllStudents(students: Student[]): void {
+    students.forEach(student => printStudent(student));
+}
+
 const john: Student = {
     firstName: "John",
     lastName: "Green",
@@ -39,6 +43,4 @@ const james: Student = {
     grades: ["3", "1", undefined]
 };
 
-printStudent(john);
-printStudent(mary);
-printStudent(james);
+printAllStudents([john, mary, james]);
