@@ -41,7 +41,12 @@ function calculateGradesAverage(grades: Grade[]): number {
     const mappedGrades: (number | undefined)[] = grades.map(mapGrade);
     const validGrades: number[] = mappedGrades.filter(grade => grade !== undefined);
     const sum: number = validGrades.reduce((acc, grade) => acc + grade, 0);
-    return sum / validGrades.length;
+    return parseFloat((sum / validGrades.length).toFixed(2));
+}
+
+function calculateAllStudentsAverage(student: Student[]): number {
+    const allGrades: Grade[] = student.flatMap(student => student.grades);
+    return calculateGradesAverage(allGrades);
 }
 
 type Student = {
@@ -125,3 +130,4 @@ const james: Student = {
 };
 
 printAllStudents([john, mary, james]);
+console.log(`Average of all students: ${calculateAllStudentsAverage([john, mary, james])}`);
